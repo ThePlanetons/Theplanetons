@@ -36,20 +36,13 @@ const services: Service[] = [
   }
 ];
 
-const Services = () => {
-  // Although scrollPosition is not directly used in rendering,
-  // it could be helpful for future enhancements.
-  const [scrollPosition, setScrollPosition] = useState<number>(0);
+const Services: React.FC = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState<boolean>(false);
-  // The activeService state will be used to add an extra style to the hovered card.
   const [activeService, setActiveService] = useState<number | null>(null);
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrollPosition(window.scrollY);
-
-      // Check if the section is in the viewport
       if (sectionRef.current) {
         const rect = sectionRef.current.getBoundingClientRect();
         setIsVisible(rect.top < window.innerHeight - 100 && rect.bottom >= 0);
@@ -57,21 +50,16 @@ const Services = () => {
     };
 
     window.addEventListener('scroll', handleScroll);
-    // Check initial visibility when the component mounts
-    handleScroll();
+    handleScroll(); // initial check
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Header animation styles
-  const getHeaderStyles = (): React.CSSProperties => {
-    return {
-      transform: `translateY(${isVisible ? '0' : '30px'})`,
-      opacity: isVisible ? 1 : 0,
-      transition: 'transform 0.6s ease-out, opacity 0.6s ease-out'
-    };
-  };
+  const getHeaderStyles = (): React.CSSProperties => ({
+    transform: `translateY(${isVisible ? '0' : '30px'})`,
+    opacity: isVisible ? 1 : 0,
+    transition: 'transform 0.6s ease-out, opacity 0.6s ease-out'
+  });
 
-  // Card animation styles with delay
   const getCardStyles = (index: number): React.CSSProperties => {
     const delay = index * 0.1;
     return {
@@ -82,7 +70,11 @@ const Services = () => {
   };
 
   return (
-    <section id="services" ref={sectionRef} className="py-32 bg-gray-50 relative overflow-hidden">
+    <section
+      id="services"
+      ref={sectionRef}
+      className="py-32 bg-gray-50 relative overflow-hidden"
+    >
       {/* Background decorative elements */}
       <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-primary/10 to-blue-300/10 rounded-full blur-3xl" />
       <div className="absolute bottom-0 left-0 w-96 h-96 bg-gradient-to-tr from-purple-300/10 to-pink-300/10 rounded-full blur-3xl" />
@@ -110,45 +102,37 @@ const Services = () => {
               onMouseLeave={() => setActiveService(null)}
             >
               <div
-                // Conditionally add a border style when this card is active (hovered)
                 className={`bg-white p-8 rounded-2xl shadow-md transition-all duration-300 h-full border ${
                   activeService === index ? 'border-primary' : 'border-gray-100'
                 } relative z-10 overflow-hidden group-hover:shadow-xl`}
               >
-                {/* Background gradient appears on hover */}
-                <div 
+                <div
                   className={`absolute inset-0 bg-gradient-to-br ${service.color} opacity-0 group-hover:opacity-5 transition-opacity duration-300`}
                 />
-                
-                {/* Icon container with a gradient background */}
+
                 <div className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${service.color} flex items-center justify-center mb-6 group-hover:scale-110 transition-all duration-300 shadow-sm`}>
-                  <div className="text-white">
-                    {service.icon}
-                  </div>
+                  <div className="text-white">{service.icon}</div>
                 </div>
-                
+
                 <h3 className="text-2xl font-semibold mb-4 group-hover:text-primary transition-colors duration-300">
                   {service.title}
                 </h3>
-                
+
                 <p className="text-gray-600 group-hover:text-gray-700 transition-colors duration-300">
                   {service.description}
                 </p>
-                
-                {/* Subtle icon positioned absolutely */}
+
                 <div className="absolute bottom-4 right-4 opacity-0 group-hover:opacity-30 transition-opacity duration-300 transform translate-x-4 group-hover:translate-x-0">
                   {service.icon}
                 </div>
-                
-                {/* Animated border at the bottom */}
+
                 <div className={`absolute bottom-0 left-0 h-1 bg-gradient-to-r ${service.color} transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left`} />
               </div>
             </div>
           ))}
         </div>
-        
-        {/* Action button */}
-        <div 
+
+        <div
           className="mt-16 text-center"
           style={{
             transform: `translateY(${isVisible ? '0' : '30px'})`,
@@ -156,8 +140,8 @@ const Services = () => {
             transition: 'transform 0.8s ease-out 0.4s, opacity 0.8s ease-out 0.4s'
           }}
         >
-          <a 
-            href="#contact" 
+          <a
+            href="#contact"
             className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-primary to-blue-600 text-white font-medium rounded-full shadow-md hover:shadow-lg shadow-primary/20 hover:shadow-primary/30 transition-all hover:scale-105"
           >
             Discuss Your Project
@@ -169,4 +153,3 @@ const Services = () => {
 };
 
 export default Services;
-
