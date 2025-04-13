@@ -19,8 +19,8 @@ const Footer = () => {
             </div>
             
             <p className="text-gray-400 text-sm">
-              Creating innovative digital solutions for businesses of all sizes.
-              We transform ideas into powerful web and mobile experiences.
+              {/* Creating innovative digital solutions for businesses of all sizes.
+              We transform ideas into powerful web and mobile experiences. */}
             </p>
             
             <div className="flex space-x-4">
