@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
+
 import '../styles.css';
 import { Globe, Smartphone, Palette, TrendingUp } from 'lucide-react';
 
