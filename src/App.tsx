@@ -1,18 +1,22 @@
-import Navbar from './components/Navbar';
-import Hero from './components/Hero';
-import Services from './components/Services';
-import Contact from './components/Contact';
-import Footer from './components/Footer';
+
+
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+
+import Projects from './Projects/Projects';
+import Landing from './components/landing/landing';
 
 function App() {
   return (
-    <div className="min-h-screen">
-      <Navbar />
-      <Hero />
-      <Services />
-      <Contact />
-      <Footer />
-    </div>
+    <BrowserRouter>
+    {/* <ScrollToTop /> */}
+    
+    <Routes>
+     
+    <Route path="/" element={<Landing></Landing>} />
+    <Route path="/projects" element={<Projects></Projects>} />
+    </Routes>
+    </BrowserRouter>
+    
   );
 }
 
