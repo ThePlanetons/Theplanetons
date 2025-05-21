@@ -1,4 +1,4 @@
-import Navbar from '../navbar/Navbar';
+// import Navbar from '../navbar/Navbar';
 import Hero from './Hero';
 import Services from '../services/Services';
 import Contact from '../contact/Contact';
@@ -7,7 +7,7 @@ import Footer from '../footer/Footer';
 function Landing() {
   return (
     <div className="min-h-screen">
-      <Navbar />
+      {/* <Navbar /> */}
       <Hero />
       <Services />
       <Contact />

@@ -1,134 +1,88 @@
+import { motion } from 'framer-motion';
+import Spline from '@splinetool/react-spline';
 
-import { useEffect, useState, useRef } from 'react';
-import { ArrowRight } from 'lucide-react';
-
-const Hero = () => {
-  const [scrollPosition, setScrollPosition] = useState(0);
-  const heroRef = useRef<HTMLDivElement>(null);
-  const [isVisible, setIsVisible] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const currentPosition = window.scrollY;
-      setScrollPosition(currentPosition);
-      
-      // Check if hero section is visible
-      if (heroRef.current) {
-        const rect = heroRef.current.getBoundingClientRect();
-        const isInView = rect.top < window.innerHeight && rect.bottom >= 0;
-        setIsVisible(isInView);
-      }
-    };
-
-    // Set initial visibility
-    setIsVisible(true);
-    
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  // Calculate parallax values with easing for smoother effect
-  const calculateParallax = (factor: number) => {
-    return scrollPosition * factor * 0.5;
-  };
-  
-  const textParallaxStyles = {
-    heading1: { transform: `translateY(${calculateParallax(-0.3)}px)`, transition: 'transform 0.3s ease-out' },
-    heading2: { transform: `translateY(${calculateParallax(-0.2)}px)`, transition: 'transform 0.3s ease-out' },
-    heading3: { transform: `translateY(${calculateParallax(-0.1)}px)`, transition: 'transform 0.3s ease-out' },
-    paragraph: { transform: `translateX(${calculateParallax(0.05)}px)`, transition: 'transform 0.3s ease-out' },
-    button: { transform: `translateX(${calculateParallax(0.02)}px)`, transition: 'transform 0.3s ease-out' }
-  };
-
+const App = () => {
   return (
-    <div 
-      ref={heroRef}
-      className="relative min-h-screen flex items-center bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 overflow-hidden"
-    >
-      {/* Background with animated particles */}
-      <div className="absolute inset-0 opacity-15">
-        <div className="absolute inset-0" style={{ 
-          backgroundImage: `radial-gradient(circle at 25px 25px, #ffffff 1%, transparent 0%)`,
-          backgroundSize: '50px 50px',
-          transform: `translateY(${scrollPosition * 0.1}px)` 
-        }} />
-      </div>
-      
-      {/* Animated gradient orb */}
-      <div 
-        className="absolute rounded-full w-96 h-96 bg-gradient-to-r from-primary/30 to-blue-500/30 blur-3xl"
-        style={{ 
-          top: '20%', 
-          right: '5%',
-          transform: `translate(${calculateParallax(-0.1)}px, ${calculateParallax(0.05)}px)`,
-          transition: 'transform 0.5s ease-out'
-        }}
-      />
-      
-      <div 
-        className="absolute rounded-full w-64 h-64 bg-gradient-to-r from-purple-500/20 to-pink-500/20 blur-3xl"
-        style={{ 
-          bottom: '15%', 
-          left: '10%',
-          transform: `translate(${calculateParallax(0.15)}px, ${calculateParallax(-0.05)}px)`,
-          transition: 'transform 0.5s ease-out'
-        }}
-      />
-      
-      {/* Content */}
-      <div className="relative z-10 max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
-        <div className="max-w-3xl">
-          <div className={`overflow-hidden transition-opacity duration-700 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
-            <h1 
-              className="text-6xl md:text-8xl font-bold text-white mb-4 opacity-95"
-              style={textParallaxStyles.heading1}
-            >
-              Crafting
-            </h1>
+    <div className="min-h-screen bg-white">
+      <nav className="absolute top-0 left-0 right-0 z-50 px-6 py-4">
+        <div className="max-w-7xl mx-auto flex justify-between items-center">
+          <div className="flex space-x-8">
+            <a href="#" className="text-black hover:text-gray-600 transition-colors">Services</a>
+            <a href="#" className="text-black hover:text-gray-600 transition-colors">Pricing</a>
+            <a href="#" className="text-black hover:text-gray-600 transition-colors">About</a>
+            <a href="#" className="text-black hover:text-gray-600 transition-colors">Insights</a>
+            <a href="#" className="text-black hover:text-gray-600 transition-colors">Contact</a>
           </div>
-          
-          <div className={`overflow-hidden transition-opacity duration-700 delay-100 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
-            <h1 
-              className="text-6xl md:text-8xl font-bold text-primary mb-4 bg-clip-text text-transparent bg-blue-500"
-              style={textParallaxStyles.heading2}
-            >
-              Digital
-            </h1>
-          </div>
-          
-          <div className={`overflow-hidden transition-opacity duration-700 delay-200 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
-            <h1 
-              className="text-6xl md:text-8xl font-bold text-white mb-10 opacity-95"
-              style={textParallaxStyles.heading3}
-            >
-              Excellence
-            </h1>
-          </div>
-          
-          <div 
-            className={`prose prose-lg text-gray-300 mb-10 max-w-2xl transition-opacity duration-700 delay-300 ${isVisible ? 'opacity-100' : 'opacity-0'}`}
-            style={textParallaxStyles.paragraph}
-          >
-            <p className="text-xl leading-relaxed">
-              We transform ideas into powerful digital solutions. Specializing in web applications,
-              mobile development, and digital marketing that drives results.
-            </p>
-          </div>
-          
-          <div className={`transition-opacity duration-700 delay-400 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
-            <a 
-              href="#contact"
-              className="inline-flex items-center bg-gradient-to-r from-primary to-blue-600 px-8 py-4 rounded-full text-white font-medium shadow-lg shadow-primary/20 hover:shadow-xl hover:shadow-primary/30 transition-all hover:scale-105 group"
-              style={textParallaxStyles.button}
-            >
+          <div className="flex items-center space-x-4">
+            <button className="text-black hover:text-gray-600 transition-colors">Login</button>
+            <button className="bg-black text-white px-4 py-2 rounded-lg flex items-center hover:bg-gray-800 transition-colors">
               Get Started
-              <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" size={20} />
-            </a>
+              <span className="ml-2">→</span>
+            </button>
           </div>
         </div>
-      </div>
+      </nav>
+
+      <main className="relative">
+        <div className="max-w-8xl mx-auto px-6 pt-32 text-center">
+          <motion.h1 
+            className="text-[180px] font-bold leading-none"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+          >
+            THE PLANET 9.
+          </motion.h1>
+
+          <div className="grid grid-cols-2 gap-8 mt-8">
+            <div className="flex items-center space-x-4">
+              <div className="flex -space-x-2">
+                <img src="https://i.pravatar.cc/40?img=1" className="w-10 h-10 rounded-full border-2 border-white" alt="User" />
+                <img src="https://i.pravatar.cc/40?img=2" className="w-10 h-10 rounded-full border-2 border-white" alt="User" />
+                <img src="https://i.pravatar.cc/40?img=3" className="w-10 h-10 rounded-full border-2 border-white" alt="User" />
+              </div>
+              <div>
+                <div className="text-2xl font-bold">2M+</div>
+                <div className="text-gray-600">World active user</div>
+              </div>
+            </div>
+
+            <div className="flex justify-end space-x-8 pt-26">
+              <div className="text-gray-600">
+                <div>Web based</div>
+                <div className="text-sm">/01</div>
+              </div>
+              <div className="text-gray-600">
+                <div>Collaborative</div>
+                <div className="text-sm">/02</div>
+              </div>
+              <div className="text-gray-600">
+                <div>Real-time</div>
+                <div className="text-sm">/03</div>
+              </div>
+            </div>
+          </div>
+
+          <div className="mt-12 grid grid-cols-2 gap-8">
+            <div>
+              <h2 className="text-2xl max-w-md">
+                The design software that keeps your flow with AI tools and built-in graphics
+              </h2>
+            </div>
+            <div className="flex justify-end">
+              {/* <button className="bg-neon text-black w-32 h-32 rounded-full flex items-center justify-center text-sm hover:bg-opacity-90 transition-colors">
+                How it works?
+              </button> */}
+            </div>
+          </div>
+        </div>
+
+        <div className="absolute pt-40 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full z-10">
+          <Spline scene="https://prod.spline.design/38H6RUsMjxrrn0bi/scene.splinecode" />
+        </div>
+      </main>
     </div>
   );
 };
 
-export default Hero;
+export default App;

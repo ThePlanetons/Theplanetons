@@ -43,7 +43,7 @@ const Navbar = () => {
   return (
     <nav
       className={`fixed w-full z-50 transition-all duration-300 ${
-        scrolled ? 'bg-white/95 backdrop-blur-sm shadow-lg' : 'bg-[#182131]'
+        scrolled ? 'bg-white/95 backdrop-blur-sm shadow-lg' : 'bg-[#8c52ff]'
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -51,15 +51,11 @@ const Navbar = () => {
           {/* Logo */}
           <div className="flex items-center">
             <a href="#" className="group flex items-center">
-              <div className="w-8 h-8 bg-gradient-to-br from-primary to-blue-600 rounded-lg mr-2 flex items-center justify-center transition-transform group-hover:rotate-6">
-                <span className="text-white font-bold text-lg">T</span>
-              </div>
               <span
                 className={`text-2xl font-bold transition-colors duration-300 ${
                   scrolled ? 'text-gray-800' : 'text-white'
                 }`}
               >
-                Theplanet9
               </span>
             </a>
           </div>
@@ -88,7 +84,7 @@ const Navbar = () => {
             ))}
             <a
               href="#contact"
-              className="bg-gradient-to-r from-primary to-blue-600 text-white px-5 py-2.5 rounded-full font-medium shadow-md shadow-primary/20 hover:shadow-lg hover:shadow-primary/30 transition-all hover:scale-105"
+              className="bg-gradient-to-r  text-white px-5 py-2.5 rounded-full font-medium shadow-md shadow-primary/20 hover:shadow-lg hover:shadow-primary/30 transition-all hover:scale-105"
             >
               Contact Us
             </a>
