@@ -79,6 +79,7 @@ const App = () => {
 
         <div className="absolute pt-40 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full z-10">
           <Spline scene="https://prod.spline.design/38H6RUsMjxrrn0bi/scene.splinecode" />
+          
         </div>
       </main>
     </div>
