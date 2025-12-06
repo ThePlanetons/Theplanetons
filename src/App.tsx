@@ -11,7 +11,6 @@ function App() {
     {/* <ScrollToTop /> */}
     
     <Routes>
-     
     <Route path="/" element={<Landing></Landing>} />
     <Route path="/projects" element={<Projects></Projects>} />
     </Routes>
