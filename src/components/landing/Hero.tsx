@@ -1,89 +1,105 @@
-import { motion } from 'framer-motion';
-import Spline from '@splinetool/react-spline';
+import { motion, useScroll, useTransform } from 'framer-motion';
+import Navbar from '../navbar/Navbar';
+import { ScrollTrigger } from "gsap/all";
+import { useRef } from "react";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
+gsap.registerPlugin(ScrollTrigger);
 
-const App = () => {
+const Hero = () => {
+  const scrollRef = useRef(null);
+
+ useGSAP(() => {
+  const el = scrollRef.current;
+
+  gsap.fromTo(
+    el,
+    {
+      scale: 1,
+      yPercent: 50,
+    },
+    {
+      scale: 1, // or try 2.5 or 4 depending on your screen
+      yPercent: -150,
+      scrollTrigger: {
+        trigger: el,
+        start: "top bottom",
+        end: "bottom top",
+        scrub: true,
+        pin: true,
+        pinSpacing: false,
+        markers: false,
+      },
+    }
+  );
+}, []);
+
+
+  const { scrollY } = useScroll();
+
+  // Transform values for parallax effects
+  const contentOpacity = useTransform(scrollY, [0, 200], [1, 0]);
+
   return (
-    <div className="min-h-screen bg-white">
-      <nav className="absolute top-0 left-0 right-0 z-50 px-6 py-4">
-        <div className="max-w-7xl mx-auto flex justify-between items-center">
-          <div className="flex space-x-8">
-            <a href="#" className="text-black hover:text-gray-600 transition-colors">Services</a>
-            <a href="#" className="text-black hover:text-gray-600 transition-colors">Pricing</a>
-            <a href="#" className="text-black hover:text-gray-600 transition-colors">About</a>
-            <a href="#" className="text-black hover:text-gray-600 transition-colors">Insights</a>
-            <a href="#" className="text-black hover:text-gray-600 transition-colors">Contact</a>
-          </div>
-          <div className="flex items-center space-x-4">
-            <button className="text-black hover:text-gray-600 transition-colors">Login</button>
-            <button className="bg-black text-white px-4 py-2 rounded-lg flex items-center hover:bg-gray-800 transition-colors">
-              Get Started
-              <span className="ml-2">→</span>
-            </button>
-          </div>
-        </div>
-      </nav>
-
-      <main className="relative">
-        <div className="max-w-8xl mx-auto px-6 pt-32 text-center">
-          <motion.h1 
-            className="text-[180px] font-bold leading-none"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-          >
-            THE PLANET 9.
-          </motion.h1>
-
-          <div className="grid grid-cols-2 gap-8 mt-8">
-            <div className="flex items-center space-x-4">
-              <div className="flex -space-x-2">
-                <img src="https://i.pravatar.cc/40?img=1" className="w-10 h-10 rounded-full border-2 border-white" alt="User" />
-                <img src="https://i.pravatar.cc/40?img=2" className="w-10 h-10 rounded-full border-2 border-white" alt="User" />
-                <img src="https://i.pravatar.cc/40?img=3" className="w-10 h-10 rounded-full border-2 border-white" alt="User" />
+    <div className="relative">
+      <Navbar />
+      {/* Hero Section */}
+      <div className="h-340 bg-white relative overflow-hidden">
+        <main className="relative">
+          <div className="max-w-8xl mx-auto px-6  text-center">
+            {/* Main Title with GSAP ScrollTrigger */}
+            <div className="relative z-20">
+              <div className="absolute pt-120 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full z-10 overflow-auto">
               </div>
-              <div>
-                <div className="text-2xl font-bold">2M+</div>
-                <div className="text-gray-600">World active user</div>
-              </div>
+              <h4
+                className="text-7xl md:text-[150px] font-mostculine font-bold leading-none"
+                ref={scrollRef}
+              >
+                THE PLANET 9
+              </h4>
             </div>
 
-            <div className="flex justify-end space-x-8 pt-26">
-              <div className="text-gray-600">
-                <div>Web based</div>
-                <div className="text-sm">/01</div>
+            {/* Content that fades out on scroll */}
+            <motion.div
+              style={{ opacity: contentOpacity }}
+              className="relative z-20"
+            >
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
+                <div className="flex items-center justify-center md:justify-start space-x-4">
+                  <div></div>
+                </div>
+
+                <div className="flex justify-center md:justify-end space-x-8 pt-8 md:pt-26">
+                  <div className="text-gray-600">
+                    <div>Web based</div>
+                    <div className="text-sm">/01</div>
+                  </div>
+                  <div className="text-gray-600">
+                    <div>Collaborative</div>
+                    <div className="text-sm">/02</div>
+                  </div>
+                  <div className="text-gray-600">
+                    <div>Real-time</div>
+                    <div className="text-sm">/03</div>
+                  </div>
+                </div>
               </div>
-              <div className="text-gray-600">
-                <div>Collaborative</div>
-                <div className="text-sm">/02</div>
+
+              <div className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div>
+                  <h2 className="text-2xl max-w-md mx-auto md:mx-0">
+                    The design software that keeps your flow with AI tools and built-in graphics
+                  </h2>
+                </div>
               </div>
-              <div className="text-gray-600">
-                <div>Real-time</div>
-                <div className="text-sm">/03</div>
-              </div>
-            </div>
+            </motion.div>
           </div>
 
-          <div className="mt-12 grid grid-cols-2 gap-8">
-            <div>
-              <h2 className="text-2xl max-w-md">
-                The design software that keeps your flow with AI tools and built-in graphics
-              </h2>
-            </div>
-            <div className="flex justify-end">
-              {/* <button className="bg-neon text-black w-32 h-32 rounded-full flex items-center justify-center text-sm hover:bg-opacity-90 transition-colors">
-                How it works?
-              </button> */}
-            </div>
-          </div>
-        </div>
-
-        <div className="absolute pt-40 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full z-10">
-          <Spline scene="https://prod.spline.design/38H6RUsMjxrrn0bi/scene.splinecode" />
-          
-        </div>
-      </main>
+          {/* 3D Scene with Parallax - Placeholder for Spline or other content */}
+        </main>
+      </div>
     </div>
   );
 };
 
-export default App;
+export default Hero;
