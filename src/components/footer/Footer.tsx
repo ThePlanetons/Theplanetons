@@ -5,17 +5,17 @@ const Footer = () => {
   const year = new Date().getFullYear();
   
   return (
-    <footer className="bg-gray-900 text-white">
+    <footer className="bg-orange-500 text-white">
       {/* Main Footer */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
           {/* Company Info */}
           <div className="space-y-6">
             <div className="flex items-center">
-              <div className="w-10 h-10 bg-gradient-to-br from-primary to-blue-600 rounded-lg flex items-center justify-center mr-3">
+              <div className="w-10 h-10 bg-gradient-to-br from-primary to-orange-900 rounded-lg flex items-center justify-center mr-3">
                 <span className="text-white font-bold text-lg">T</span>
               </div>
-              <span className="text-2xl font-bold">TechCraft</span>
+              <span className="text-2xl font-bold">THE PLANET 9</span>
             </div>
             
             <p className="text-gray-400 text-sm">
@@ -30,10 +30,10 @@ const Footer = () => {
               <a href="#" className="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-primary transition-colors">
                 <Twitter size={18} />
               </a>
-              <a href="#" className="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-primary transition-colors">
+              <a href="https://www.instagram.com/the_planet_9_?igsh=YXZuMGs4NGxjODIy" target="_blank" className="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-primary transition-colors">
                 <Instagram size={18} />
               </a>
-              <a href="#" className="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-primary transition-colors">
+              <a href="https://www.linkedin.com/company/the-planet-9/" target="_blank" className="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-primary transition-colors">
                 <Linkedin size={18} />
               </a>
             </div>
@@ -112,7 +112,7 @@ const Footer = () => {
       <div className="border-t border-gray-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex flex-col md:flex-row justify-between items-center">
           <p className="text-gray-500 text-sm">
-            © {year} TechCraft. All rights reserved.
+            © {year} The Planet 9. All rights reserved.
           </p>
           
           <div className="mt-4 md:mt-0 flex space-x-6">

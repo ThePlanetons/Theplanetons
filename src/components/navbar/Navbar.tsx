@@ -2,63 +2,70 @@ import { useState, useEffect } from 'react';
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
-
-  // Transform values for parallax effects
-
+  const [showNavbar, setShowNavbar] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 100);
+      const currentScrollY = window.scrollY;
+
+      // Background blur logic
+      setIsScrolled(currentScrollY > 100);
+
+      // Scroll direction logic
+      if (currentScrollY > lastScrollY && currentScrollY > 100) {
+        // scrolling down
+        setShowNavbar(false);
+      } else {
+        // scrolling up
+        setShowNavbar(true);
+      }
+
+      setLastScrollY(currentScrollY);
     };
 
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [lastScrollY]);
 
   return (
-    <div>
-      <div className="relative"></div>
-      <nav
-        className="fixed top-0 left-0 right-0 z-50 px-6 py-4 transition-all duration-500"
-        style={{
-          backgroundColor: isScrolled ? 'rgba(255, 255, 255, 0.95)' : 'transparent',
-          backdropFilter: isScrolled ? 'blur(10px)' : 'none',
-          borderBottom: isScrolled ? '1px solid rgba(0, 0, 0, 0.1)' : 'none'
-        }}
-      >
-        <div className="max-w-7xl mx-auto flex justify-between items-center">
-          {/* Logo Area */}
-          <div className="flex items-center">
-
-
-            {/* Navigation Links */}
-            <div
-              style={{ backgroundColor: '#fba907' }}
-              className="flex space-x-8 pl-10 pt-2 pb-2 pr-10 rounded-lg"
-
-            >
-              <a href="#" className="text-white hover:text-gray-600 transition-colors">Services</a>
-              <a href="#" className="text-white hover:text-gray-600 transition-colors">Pricing</a>
-              <a href="#" className="text-white hover:text-gray-600 transition-colors">About</a>
-              <a href="#" className="text-white hover:text-gray-600 transition-colors">Insights</a>
-              <a href="#" className="text-white hover:text-gray-600 transition-colors">Contact</a>
-            </div>
-          </div>
-
-          {/* Right Side Buttons */}
-          <div className="flex items-center space-x-4">
-            <button className="text-black  hover:bg-yellow-500 hover:text-gray-600 transition-colors">Login</button>
-            <button
-              style={{ backgroundColor: '#fba907' }}
-              className="text-white px-4 py-2 rounded-lg flex items-center transition-colors"
-            >
-              Get Started
-              <span className="ml-2">→</span>
-            </button>
+    <nav
+      className={`fixed top-0 left-0 right-0 z-50 px-6 py-4 transition-all duration-500 ${
+        showNavbar ? 'translate-y-0' : '-translate-y-full'
+      }`}
+      style={{
+        backgroundColor: isScrolled ? 'rgba(255, 255, 255, 0.95)' : 'transparent',
+        backdropFilter: isScrolled ? 'blur(10px)' : 'none',
+        borderBottom: isScrolled ? '1px solid rgba(0, 0, 0, 0.1)' : 'none',
+      }}
+    >
+      <div className="max-w-7xl mx-auto flex justify-between items-center">
+        {/* Left */}
+        <div className="flex items-center">
+          <div
+            style={{ backgroundColor: '#f97316' }}
+            className="flex space-x-8 px-10 py-2 rounded-lg"
+          >
+            <a className="text-white hover:text-gray-600">Services</a>
+            <a className="text-white hover:text-gray-600">Pricing</a>
+            <a className="text-white hover:text-gray-600">About</a>
+            <a className="text-white hover:text-gray-600">Insights</a>
+            <a className="text-white hover:text-gray-600">Contact</a>
           </div>
         </div>
-      </nav>
-    </div>
+
+        {/* Right */}
+        <div className="flex items-center space-x-4">
+          <button className="text-black hover:text-gray-600">Login</button>
+          <button
+            style={{ backgroundColor: '#f97316' }}
+            className="text-white px-4 py-2 rounded-lg flex items-center"
+          >
+            Get Started <span className="ml-2">→</span>
+          </button>
+        </div>
+      </div>
+    </nav>
   );
 };
 

@@ -141,7 +141,7 @@ const Services: React.FC = () => {
         >
           <a
             href="#contact"
-            className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-primary to-blue-600 text-white font-medium rounded-full shadow-md hover:shadow-lg shadow-primary/20 hover:shadow-primary/30 transition-all hover:scale-105"
+            className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-primary to-orange-500 text-white font-medium rounded-full shadow-md hover:shadow-lg shadow-primary/20 hover:shadow-primary/30 transition-all hover:scale-105"
           >
             Discuss Your Project
           </a>

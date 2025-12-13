@@ -9,7 +9,7 @@ gsap.registerPlugin(ScrollTrigger);
 const Hero = () => {
   const scrollRef = useRef(null);
 
- useGSAP(() => {
+useGSAP(() => {
   const el = scrollRef.current;
 
   gsap.fromTo(

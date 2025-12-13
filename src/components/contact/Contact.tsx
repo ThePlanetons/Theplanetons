@@ -38,7 +38,7 @@ const Contact = () => {
     setTimeout(() => {
       console.log(formData);
       setFormStatus('success');
-      
+
       // Reset form after success
       setTimeout(() => {
         setFormData({ name: '', email: '', message: '' });
@@ -58,17 +58,13 @@ const Contact = () => {
   };
 
   return (
-    <section 
-      id="contact" 
+    <section
+      id="contact"
       ref={sectionRef}
       className="py-24 bg-gradient-to-br from-gray-50 to-gray-100 relative overflow-hidden"
     >
-      {/* Decorative elements */}
-      <div className="absolute top-20 right-20 w-64 h-64 bg-primary/5 rounded-full blur-3xl" />
-      <div className="absolute -bottom-32 -left-32 w-96 h-96 bg-blue-500/5 rounded-full blur-3xl" />
-      
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div 
+        <div
           className="text-center mb-16"
           style={{
             transform: `translateY(${isVisible ? '0' : '30px'})`,
@@ -87,7 +83,7 @@ const Contact = () => {
           </p>
         </div>
 
-        <div 
+        <div
           className="grid md:grid-cols-5 gap-12 max-w-6xl mx-auto"
           style={{
             transform: `translateY(${isVisible ? '0' : '30px'})`,
@@ -103,7 +99,7 @@ const Contact = () => {
                   <h3 className="text-2xl font-semibold mb-4 text-gray-800">How to reach us</h3>
                   <p className="text-gray-600">Have a project in mind? Let's discuss how TechCraft can help you achieve your goals.</p>
                 </div>
-                
+
                 <div className="space-y-4">
                   <div className="flex items-center space-x-3">
                     <div className="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center text-primary">
@@ -113,7 +109,7 @@ const Contact = () => {
                       theplanet9official@gmail.com
                     </a>
                   </div>
-                  
+
                   <div className="pt-6 border-t border-gray-100">
                     <p className="text-gray-500 text-sm">
                       Our team is available Monday through Friday, 9am to 5pm. We'll get back to you within 24 hours.
@@ -125,7 +121,7 @@ const Contact = () => {
           </div>
 
           {/* Form container */}
-          <div 
+          <div
             className="md:col-span-3"
             ref={formRef}
           >
@@ -142,13 +138,12 @@ const Contact = () => {
                 <form onSubmit={handleSubmit} className="space-y-6">
                   <div style={getAnimationStyle(0)}>
                     <div className="relative">
-                      <label 
-                        htmlFor="name" 
-                        className={`absolute left-4 transition-all duration-200 ${
-                          focusedField === 'name' || formData.name 
-                            ? '-top-2 text-xs bg-white px-1 text-primary' 
+                      <label
+                        htmlFor="name"
+                        className={`absolute left-4 transition-all duration-200 ${focusedField === 'name' || formData.name
+                            ? '-top-2 text-xs bg-white px-1 text-primary'
                             : 'top-3 text-gray-500'
-                        }`}
+                          }`}
                       >
                         Your Name
                       </label>
@@ -172,13 +167,12 @@ const Contact = () => {
 
                   <div style={getAnimationStyle(1)}>
                     <div className="relative">
-                      <label 
-                        htmlFor="email" 
-                        className={`absolute left-4 transition-all duration-200 ${
-                          focusedField === 'email' || formData.email 
-                            ? '-top-2 text-xs bg-white px-1 text-primary' 
+                      <label
+                        htmlFor="email"
+                        className={`absolute left-4 transition-all duration-200 ${focusedField === 'email' || formData.email
+                            ? '-top-2 text-xs bg-white px-1 text-primary'
                             : 'top-3 text-gray-500'
-                        }`}
+                          }`}
                       >
                         Email Address
                       </label>
@@ -202,13 +196,12 @@ const Contact = () => {
 
                   <div style={getAnimationStyle(2)}>
                     <div className="relative">
-                      <label 
-                        htmlFor="message" 
-                        className={`absolute left-4 transition-all duration-200 ${
-                          focusedField === 'message' || formData.message 
-                            ? '-top-2 text-xs bg-white px-1 text-primary' 
+                      <label
+                        htmlFor="message"
+                        className={`absolute left-4 transition-all duration-200 ${focusedField === 'message' || formData.message
+                            ? '-top-2 text-xs bg-white px-1 text-primary'
                             : 'top-3 text-gray-500'
-                        }`}
+                          }`}
                       >
                         Your Message
                       </label>
@@ -234,9 +227,8 @@ const Contact = () => {
                     <button
                       type="submit"
                       disabled={formStatus === 'submitting'}
-                      className={`w-full flex justify-center items-center bg-gradient-to-r from-primary to-blue-600 text-white px-6 py-4 rounded-lg shadow-md hover:shadow-lg transition-all hover:scale-[1.02] ${
-                        formStatus === 'submitting' ? 'opacity-70 cursor-not-allowed' : ''
-                      }`}
+                      className={`w-full flex justify-center items-center bg-gradient-to-r from-primary to-orange-500 text-white px-6 py-4 rounded-lg shadow-md hover:shadow-lg transition-all hover:scale-[1.02] ${formStatus === 'submitting' ? 'opacity-70 cursor-not-allowed' : ''
+                        }`}
                     >
                       {formStatus === 'submitting' ? (
                         <>
